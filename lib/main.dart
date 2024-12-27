@@ -1,3 +1,4 @@
+import 'package:ecommerce/HomePage.dart';
 import 'package:ecommerce/products/productlists.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class ecommerce extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Removes the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => ProductListPage(),
+        '/': (context) => HomePage(),
     },
 );
 }
