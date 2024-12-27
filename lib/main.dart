@@ -13,12 +13,12 @@ void main() async {
   try {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-       apiKey: 'AIzaSyD-TjE_oNwx26zhF5yBqMIZ0It9cIcQ4p4',
-    appId: '1:847075322554:ios:1f89c7090782f95d31b083',
-    messagingSenderId: '847075322554',
-    projectId: 'e-commerce-79990',
-    storageBucket: 'e-commerce-79990.firebasestorage.app',
-    iosBundleId: 'com.example.ecommerce',
+        apiKey: 'AIzaSyD-TjE_oNwx26zhF5yBqMIZ0It9cIcQ4p4',
+        appId: '1:847075322554:ios:1f89c7090782f95d31b083',
+        messagingSenderId: '847075322554',
+        projectId: 'e-commerce-79990',
+        storageBucket: 'e-commerce-79990.firebasestorage.app',
+        iosBundleId: 'com.example.ecommerce',
       ),
     );
   } catch (e) {
@@ -28,13 +28,11 @@ void main() async {
   runApp(ecommerce());
 }
 
-
-
 class ecommerce extends StatelessWidget {
   const ecommerce({super.key});
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Removes the debug banner
       initialRoute: '/',
@@ -44,4 +42,3 @@ class ecommerce extends StatelessWidget {
     );
   }
 }
-  

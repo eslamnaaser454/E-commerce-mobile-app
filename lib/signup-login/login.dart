@@ -123,63 +123,65 @@ class _SignUpPageState extends State<Loginpage> {
                     color: Color(0xFF6055D8),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  
                   child: TextButton(
-                                       onPressed: () async {
-                          try {
-                            // Attempt to sign in with Firebase Authentication
-                            UserCredential userCredential = await FirebaseAuth
-                                .instance
-                                .signInWithEmailAndPassword(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
+                    onPressed: () async {
+                      try {
+                        // Attempt to sign in with Firebase Authentication
+                        UserCredential userCredential = await FirebaseAuth
+                            .instance
+                            .signInWithEmailAndPassword(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        );
 
-                            // If successful, navigate to the Home Page
+                        // If successful, navigate to the Home Page
 
-                            // Now, check if the email is verified from Firestore
-                            DocumentSnapshot userDoc = await FirebaseFirestore
-                                .instance
-                                .collection(
-                                    'users') // Your Firestore collection name
-                                .doc(userCredential.user!
-                                    .uid) // Get the user's UID from Firebase Auth
-                                .get();
+                        // Now, check if the email is verified from Firestore
+                        DocumentSnapshot userDoc = await FirebaseFirestore
+                            .instance
+                            .collection(
+                                'users') // Your Firestore collection name
+                            .doc(userCredential.user!
+                                .uid) // Get the user's UID from Firebase Auth
+                            .get();
 
-                            if (userDoc.exists) { var fullName = userDoc.get('fullName'); 
-                            var email = userDoc.get('email');
-                              Navigator.push(context, _createPageRoute( HomePage(name: fullName,email: email)));   // Check the 'isVerify' field in Firestore
-                   
-                      
-                            }
-                          } catch (e) {
-                            // Show an alert if there is an error (e.g., wrong credentials)
-                  
-    bool dialogOpen = true;
+                        if (userDoc.exists) {
+                          var fullName = userDoc.get('fullName');
+                          var email = userDoc.get('email');
+                          Navigator.push(
+                              context,
+                              _createPageRoute(HomePage(
+                                  name: fullName,
+                                  email:
+                                      email))); // Check the 'isVerify' field in Firestore
+                        }
+                      } catch (e) {
+                        // Show an alert if there is an error (e.g., wrong credentials)
 
-    // Show the dialog
-    showDialog(
-      context: context,
-      builder: (context) => ErrorMessagePopup(
-        title: "failed to Sign in",
-        description: "User name or password is incorrect",
-      ),
-    ).then((_) {
-      // When the dialog is dismissed manually, set dialogOpen to false
-      dialogOpen = false;
-    });
+                        bool dialogOpen = true;
 
-    // Dismiss the dialog automatically after 1.5 seconds
-    Future.delayed(const Duration(seconds: 1, milliseconds: 500), () {
-      if (dialogOpen) {
-        Navigator.of(context).pop(); // Dismiss the dialog only if still open
-      }
-    });
-  }
-  
-                          
-                        },
+                        // Show the dialog
+                        showDialog(
+                          context: context,
+                          builder: (context) => ErrorMessagePopup(
+                            title: "failed to Sign in",
+                            description: "User name or password is incorrect",
+                          ),
+                        ).then((_) {
+                          // When the dialog is dismissed manually, set dialogOpen to false
+                          dialogOpen = false;
+                        });
 
+                        // Dismiss the dialog automatically after 1.5 seconds
+                        Future.delayed(
+                            const Duration(seconds: 1, milliseconds: 500), () {
+                          if (dialogOpen) {
+                            Navigator.of(context)
+                                .pop(); // Dismiss the dialog only if still open
+                          }
+                        });
+                      }
+                    },
 
                     /**
                      
@@ -215,7 +217,7 @@ class _SignUpPageState extends State<Loginpage> {
                 TextButton(
                   onPressed: navigateTosignupPage,
                   child: Text(
-                    'New to electech? Sign up',
+                    'New User ? Sign up',
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 14,
@@ -231,22 +233,21 @@ class _SignUpPageState extends State<Loginpage> {
       ),
     );
   }
-
 }
- PageRouteBuilder _createPageRoute(Widget page) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => page,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0.0);
-        const end = Offset.zero;
-        const curve = Curves.easeInOut;
 
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        var offsetAnimation = animation.drive(tween);
+PageRouteBuilder _createPageRoute(Widget page) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.easeInOut;
 
-        return SlideTransition(position: offsetAnimation, child: child);
-      },
-      transitionDuration: const Duration(milliseconds: 300),
-    );
-  }
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
+
+      return SlideTransition(position: offsetAnimation, child: child);
+    },
+    transitionDuration: const Duration(milliseconds: 300),
+  );
+}

@@ -264,25 +264,40 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                         color: const Color(0xFF6055D8),
                         borderRadius: BorderRadius.circular(8),
-                        image: const DecorationImage(
-                          image: AssetImage('Media/images/children.jpg'),
-                          fit: BoxFit.cover,
-                        ),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Get Winter Discount\n20% Off\nFor Children',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
+                      child: Stack(
+                        children: [
+                          // Add the image with padding
+                          Positioned.fill(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 16.0), // Padding for the image
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Image.asset(
+                                  'Media/images/children.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          // Add your text
+                          const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Get Winter Discount\n20% Off\nFor Children',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -411,12 +426,12 @@ class FeaturedSection extends StatelessWidget {
           FeaturedProductCard(
             name: 'Green sneakers',
             price: 40,
-            image: 'Media/images/green sneakers.png',
+            image: 'Media/images/Green sneakers.jpeg',
           ),
           FeaturedProductCard(
             name: 'black t-shirt',
             price: 15,
-            image: 'Media/images/black t-shirt.png',
+            image: 'Media/images/black tshirt.jpg',
           ),
           FeaturedProductCard(
             name: 'iphone watch',
@@ -526,12 +541,12 @@ class MostPopularSection extends StatelessWidget {
           PopularProductCard(
             name: 'Classic shoes',
             price: 70,
-            image: 'Media/images/blue classis shoes.png',
+            image: 'Media/images/blue classic shoes.jpg',
           ),
           PopularProductCard(
             name: 'pump jacket',
             price: 400,
-            image: 'Media/images/blue pump jacket.png',
+            image: 'Media/images/pump jacket.jpg',
           ),
           PopularProductCard(
             name: 'Skyblue t-shirt',
@@ -541,7 +556,7 @@ class MostPopularSection extends StatelessWidget {
           PopularProductCard(
             name: 'Black converse',
             price: 50,
-            image: 'Media/images/black converse.png',
+            image: 'Media/images/black conversee.jpeg',
           ),
           PopularProductCard(
             name: 'leather jacket',
