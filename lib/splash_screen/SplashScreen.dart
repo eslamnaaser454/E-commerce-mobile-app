@@ -2,6 +2,7 @@
 import 'package:ecommerce/signup-login/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({
     super.key,
@@ -14,15 +15,12 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     // Navigate to the login page after 3000ms
     Future.delayed(const Duration(milliseconds: 3000), () {
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-
           pageBuilder: (context, animation, secondaryAnimation) => SignUpPage(),
-
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             // Applying ease-in-out animation
             const begin = Offset(1.0, 0.0); // Start from the right
@@ -45,7 +43,7 @@ class SplashScreen extends StatelessWidget {
         backgroundColor: backgroundColor,
         body: Center(
           child: Image(
-            image: const AssetImage('images/shopping-bag.png'),
+            image: const AssetImage('Media/images/shopping-bag.png'),
             width: 150,
             height: 150,
             fit: BoxFit.contain,

@@ -1,4 +1,5 @@
 // بسم الله
+import 'package:ecommerce/HomePage.dart';
 import 'package:ecommerce/signup-login/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +17,11 @@ class _SignUpPageState extends State<Loginpage> {
   @override
   Widget build(BuildContext context) {
     void _navigateTosignupPage() {
-    // Implement navigation to the login page here
-   Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
-  }
+      // Implement navigation to the login page here
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SignUpPage()));
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -80,7 +83,6 @@ class _SignUpPageState extends State<Loginpage> {
                     color: const Color.fromARGB(255, 241, 241, 241),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                
                 ),
                 SizedBox(height: 19),
                 Container(
@@ -126,7 +128,10 @@ class _SignUpPageState extends State<Loginpage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Signing in...')),
                         );
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
                       }
                     },
                     child: Text(

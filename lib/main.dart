@@ -1,4 +1,7 @@
+import 'package:ecommerce/HomePage.dart';
 import 'package:ecommerce/products/productlists.dart';
+import 'package:ecommerce/signup-login/signup.dart';
+import 'package:ecommerce/splash_screen/SplashScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -15,8 +18,9 @@ class ecommerce extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Removes the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => ProductListPage(),
-      },
-    );
-  }
+        '/': (context) => SplashScreen(),
+        '/home': (context) => HomePage(),
+      },
+    );
+  }
 }
