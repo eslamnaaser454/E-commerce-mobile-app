@@ -4,6 +4,7 @@ import 'package:ecommerce/signup-login/signup.dart';
 import 'package:ecommerce/splash_screen/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce/products/productlists.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,17 +29,19 @@ void main() async {
 }
 
 
+
 class ecommerce extends StatelessWidget {
   const ecommerce({super.key});
 
   @override
-  Widget build(BuildContext context) {
+    Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Removes the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => SplashScreen(),
-        '/signup': (context) => SignUpPage(), },
+        '/': (context) => ProductListPage(), // Use ProductListPage here
+        // '/signup': (context) => SignUpPage(),
+      },
     );
   }
 }
