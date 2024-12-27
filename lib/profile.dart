@@ -1,3 +1,4 @@
+import 'package:ecommerce/products/favorite.dart';
 import 'package:ecommerce/products/productlists.dart';
 import 'package:ecommerce/settings.dart';
 import 'package:ecommerce/signup-login/login.dart';
@@ -21,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     name = widget.name;
-    email=widget.email;
+    email = widget.email;
   }
 
   void _onItemTapped(int index) {
@@ -33,7 +34,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage(name: name, email: email)),
+          MaterialPageRoute(
+              builder: (context) => HomePage(name: name, email: email)),
         );
         break;
       case 1:
@@ -42,18 +44,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProductListPage(name: name,email: email,)),
+          MaterialPageRoute(
+              builder: (context) => ProductListPage(
+                    name: name,
+                    email: email,
+                  )),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email:email)),
+          MaterialPageRoute(
+              builder: (context) => ProfileScreen(name: name, email: email)),
         );
         break;
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +79,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Profile Image
                   CircleAvatar(
                     radius: 40,
-                  backgroundImage: AssetImage("images/Blank.png"),
+                    backgroundImage: AssetImage("images/Blank.png"),
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   Text(
-                   widget.name,
+                    widget.name,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 24,
@@ -121,9 +127,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   _buildMenuItem(
-                    icon: Icons.share,
-                    title: 'Share App',
-                    onTap: () {},
+                    icon: Icons.favorite,
+                    title: 'favorite',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FavoritePage(
+                                favoriteProducts: favoriteProducts,
+                                  name: name,
+                                  email: email,
+                                )),
+                      );
+                    },
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   _buildMenuItem(
@@ -134,8 +150,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Spacer(),
                   TextButton(
                     onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => Loginpage()));
-
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Loginpage()));
                     },
                     child: const Text(
                       'Sign Out',
@@ -154,7 +170,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           },
         ),
       ),
-    bottomNavigationBar: ActionBar(
+      bottomNavigationBar: ActionBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
@@ -162,46 +178,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-  Widget _buildMenuItem({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return Container(
-      height: 48,
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: Color(0xFFF7F7F7),
+Widget _buildMenuItem({
+  required IconData icon,
+  required String title,
+  required VoidCallback onTap,
+}) {
+  return Container(
+    height: 48,
+    margin: const EdgeInsets.symmetric(horizontal: 16),
+    decoration: BoxDecoration(
+      color: Color(0xFFF7F7F7),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(8),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(8),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                Icon(icon, size: 24, color: Colors.black),
-                const SizedBox(width: 12),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xD9000000),
-                  ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              Icon(icon, size: 24, color: Colors.black),
+              const SizedBox(width: 12),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xD9000000),
                 ),
-                const Spacer(),
-                const Icon(Icons.arrow_forward_ios,
-                    size: 24, color: Colors.black),
-              ],
-            ),
+              ),
+              const Spacer(),
+              const Icon(Icons.arrow_forward_ios,
+                  size: 24, color: Colors.black),
+            ],
           ),
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}

@@ -39,7 +39,7 @@ class ecommerce extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Removes the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => SignUpPage(), // Use ProductListPage here
+        '/': (context) => HomePage(name: '', email: '',), // Use ProductListPage here
       },
     );
   }
