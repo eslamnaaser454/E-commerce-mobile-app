@@ -1,33 +1,67 @@
+import 'package:ecommerce/HomePage.dart';
+import 'package:ecommerce/actionbar.dart';
+import 'package:ecommerce/profile.dart';
 import 'package:flutter/material.dart';
 import 'detailpage.dart'; // Import the detail page
 
-void main() {
-  runApp(MyApp());
-}
+class ProductListPage extends StatefulWidget {
+   final String name;
+  final String email;
 
-class MyApp extends StatelessWidget {
+  ProductListPage({super.key, required this.name, required this.email});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ProductListPage(),
-    );
-  }
+  _ProductListPageState createState() => _ProductListPageState();
 }
 
-class ProductListPage extends StatelessWidget {
+class _ProductListPageState extends State<ProductListPage> {
+   late String name;
+  late String email;
   final List<Product> products = [
-    const Product(
-        name: 'Watch', price: 40, imageUrl: 'Media/images/watch1.jpg'),
-    const Product(
-        name: 'Nike Shoes', price: 430, imageUrl: 'Media/images/nike.jpg'),
+    const Product(name: 'Watch', price: 40, imageUrl: 'Media/images/watch1.jpg'),
+    const Product(name: 'Nike Shoes', price: 430, imageUrl: 'Media/images/nike.jpg'),
     const Product(name: 'LG TV', price: 330, imageUrl: 'Media/images/TV.jpg'),
-    const Product(
-        name: 'Airpods', price: 333, imageUrl: 'Media/images/earphones.jpg'),
-    const Product(
-        name: 'Jacket', price: 50, imageUrl: 'Media/images/jacket.jpg'),
-    const Product(
-        name: 'Hoodie', price: 400, imageUrl: 'Media/images/red-hoodie.jpg'),
+    const Product(name: 'Airpods', price: 333, imageUrl: 'Media/images/earphones.jpg'),
+    const Product(name: 'Jacket', price: 50, imageUrl: 'Media/images/jacket.jpg'),
+    const Product(name: 'Hoodie', price: 400, imageUrl: 'Media/images/red-hoodie.jpg'),
   ];
+
+  int _selectedIndex = 2;
+  void initState() {
+    super.initState();
+    name = widget.name;
+    email=widget.email;
+  }
+  
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage(name: name, email: email)),
+        );
+        break;
+      case 1:
+        // Implement navigation for case 1 if needed
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProductListPage(name: name,email: email,)),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email: email)),
+        );
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +89,10 @@ class ProductListPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: ActionBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

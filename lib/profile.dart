@@ -1,3 +1,4 @@
+import 'package:ecommerce/products/productlists.dart';
 import 'package:ecommerce/settings.dart';
 import 'package:ecommerce/signup-login/login.dart';
 import 'package:flutter/material.dart';
@@ -32,17 +33,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  HomePage(name: name,email: email,)),
+          MaterialPageRoute(builder: (context) => HomePage(name: name, email: email)),
+        );
+        break;
+      case 1:
+        // Implement navigation for case 1 if needed
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProductListPage(name: name,email: email,)),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email: widget.email)),
+          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email:email)),
         );
         break;
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

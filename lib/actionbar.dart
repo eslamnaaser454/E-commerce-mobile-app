@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
-import 'profile.dart';
+import 'package:ecommerce/HomePage.dart';
 
 class ActionBar extends StatefulWidget {
   final int currentIndex;
