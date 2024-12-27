@@ -4,13 +4,25 @@ import 'profile.dart'; // Import the ProfileScreen
 import 'settings.dart'; // Import the SettingsScreen
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String name;
+   final String email;
+  
+  HomePage({super.key, required this.name, required this.email});
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  late String name;
+  late String email;
+  @override
+ void initState() {
+    super.initState();
+    name = widget.name;
+    email = widget.email;
+  }
+
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -22,13 +34,14 @@ class _HomePageState extends State<HomePage> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) =>  HomePage(name:name, email: email)),
         );
         break;
+
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfileScreen()),
+          MaterialPageRoute(builder: (context) => ProfileScreen(name: name,email: email,)),
         );
         break;
     }
@@ -52,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProfileScreen()),
+                              builder: (context) => ProfileScreen(name: name,email: email)),
                         );
                       },
                       child: CircleAvatar(
@@ -64,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(width: 12),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
                           'Hello!',
                           style: TextStyle(
@@ -74,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Text(
-                          'Omar Lashin',
+                        widget.name,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -228,7 +241,8 @@ class FeaturedSection extends StatelessWidget {
           FeaturedProductCard(
             name: 'Nike Shoes',
             price: 430,
-            image: 'Media/images/nike shoes.png',
+            //insert nike shoes.png 
+            image: 'images/nikeshoes.png',
           ),
           FeaturedProductCard(
             name: 'Casio watch',

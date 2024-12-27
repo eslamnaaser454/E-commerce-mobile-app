@@ -1,15 +1,27 @@
 import 'package:ecommerce/settings.dart';
+import 'package:ecommerce/signup-login/login.dart';
 import 'package:flutter/material.dart';
 import 'actionbar.dart';
 import 'HomePage.dart';
 
 class ProfileScreen extends StatefulWidget {
+  final String name;
+  String email;
+
+  ProfileScreen({super.key, required this.name, required this.email});
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
   int _selectedIndex = 3;
+  late String name;
+  late String email;
+  void initState() {
+    super.initState();
+    name = widget.name;
+    email=widget.email;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -20,13 +32,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) =>  HomePage(name: name,email: email,)),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfileScreen()),
+          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email: widget.email)),
         );
         break;
     }
@@ -50,12 +62,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Profile Image
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: NetworkImage(
-                        'https://dashboard.codeparrot.ai/api/assets/Z22vgo6CYQNjI8uT'),
+                  backgroundImage: AssetImage("images/Blank.png"),
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   Text(
-                    "TruYou",
+                   widget.name,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 24,
@@ -65,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(height: constraints.maxHeight * 0.01),
                   Text(
-                    "truyou.team@gmail.com",
+                    widget.email,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 12,
@@ -111,7 +122,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const Spacer(),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => Loginpage()));
+
+                    },
                     child: const Text(
                       'Sign Out',
                       style: TextStyle(
