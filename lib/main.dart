@@ -4,7 +4,8 @@ import 'package:ecommerce/signup-login/signup.dart';
 import 'package:ecommerce/splash_screen/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce/products/productlists.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/models/cart.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,12 @@ void main() async {
     print("Firebase is already initialized");
   }
 
-  runApp(ecommerce());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Cart(),
+      child: ecommerce(),
+    ),
+  );
 }
 
 class ecommerce extends StatelessWidget {
@@ -37,7 +43,8 @@ class ecommerce extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Removes the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => SignUpPage(), // Use ProductListPage here
+        '/': (context) => SplashScreen(), // Use SplashScreen here
+        // '/signup': (context) => SignUpPage(),
       },
     );
   }

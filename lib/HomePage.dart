@@ -3,14 +3,7 @@ import 'package:flutter/material.dart';
 import 'actionbar.dart'; // Import the ActionBar
 import 'profile.dart'; // Import the ProfileScreen
 import 'settings.dart'; // Import the SettingsScreen
-
-class Product {
-  final String name;
-  final double price;
-  final String image;
-
-  Product({required this.name, required this.price, required this.image});
-}
+import 'models/product.dart'; // Import the correct Product class
 
 class HomePage extends StatefulWidget {
   final String name;
@@ -29,42 +22,42 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _searchController = TextEditingController();
   List<Product> _allProducts = [
     Product(
-        name: 'Barce watch', price: 40, image: 'Media/images/barce watch.png'),
-    Product(name: 'Nike Shoes', price: 430, image: 'images/nikeshoes.png'),
+        name: 'Barce watch', price: 40, imageUrl: 'Media/images/barce watch.png'),
+    Product(name: 'Nike Shoes', price: 430, imageUrl: 'images/nikeshoes.png'),
     Product(
-        name: 'Casio watch', price: 333, image: 'Media/images/casio watch.png'),
+        name: 'Casio watch', price: 333, imageUrl: 'Media/images/casio watch.png'),
     Product(
         name: 'Green sneakers',
         price: 40,
-        image: 'Media/images/green sneakers.png'),
+        imageUrl: 'Media/images/green sneakers.png'),
     Product(
         name: 'black t-shirt',
         price: 15,
-        image: 'Media/images/black t-shirt.png'),
+        imageUrl: 'Media/images/black t-shirt.png'),
     Product(
         name: 'iphone watch',
         price: 333,
-        image: 'Media/images/iphone watch.png'),
+        imageUrl: 'Media/images/iphone watch.png'),
     Product(
         name: 'Classic shoes',
         price: 70,
-        image: 'Media/images/blue classis shoes.png'),
+        imageUrl: 'Media/images/blue classis shoes.png'),
     Product(
         name: 'pump jacket',
         price: 400,
-        image: 'Media/images/blue pump jacket.png'),
+        imageUrl: 'Media/images/blue pump jacket.png'),
     Product(
         name: 'Skyblue t-shirt',
         price: 330,
-        image: 'Media/images/skyblue t-shirt.png'),
+        imageUrl: 'Media/images/skyblue t-shirt.png'),
     Product(
         name: 'Black converse',
         price: 50,
-        image: 'Media/images/black converse.png'),
+        imageUrl: 'Media/images/black converse.png'),
     Product(
         name: 'leather jacket',
         price: 400,
-        image: 'Media/images/brown leather jacket.png'),
+        imageUrl: 'Media/images/brown leather jacket.png'),
   ];
   List<Product> _filteredProducts = [];
   Product? _selectedProduct;
@@ -375,7 +368,7 @@ class _HomePageState extends State<HomePage> {
                         FeaturedProductCard(
                           name: _selectedProduct!.name,
                           price: _selectedProduct!.price,
-                          image: _selectedProduct!.image,
+                          image: _selectedProduct!.imageUrl,
                         ),
                       const SizedBox(height: 20),
                       ElevatedButton(
@@ -464,6 +457,15 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
   bool isFavorite = false;
 
   @override
+  void initState() {
+    super.initState();
+    isFavorite = favoriteProducts.any((product) =>
+        product.name == widget.name &&
+        product.price == widget.price &&
+        product.imageUrl == widget.image);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: 120,
@@ -500,6 +502,18 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                 onTap: () {
                   setState(() {
                     isFavorite = !isFavorite;
+                    if (isFavorite) {
+                      favoriteProducts.add(Product(
+                        name: widget.name,
+                        price: widget.price,
+                        imageUrl: widget.image,
+                      ));
+                    } else {
+                      favoriteProducts.removeWhere((product) =>
+                          product.name == widget.name &&
+                          product.price == widget.price &&
+                          product.imageUrl == widget.image);
+                    }
                   });
                 },
                 child: Icon(
@@ -509,7 +523,6 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
               ),
             ],
           ),
-          
           Text(
             '\$${widget.price}',
             style: const TextStyle(
@@ -590,6 +603,15 @@ class _PopularProductCardState extends State<PopularProductCard> {
   bool isFavorite = false;
 
   @override
+  void initState() {
+    super.initState();
+    isFavorite = favoriteProducts.any((product) =>
+        product.name == widget.name &&
+        product.price == widget.price &&
+        product.imageUrl == widget.image);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: 120,
@@ -626,6 +648,18 @@ class _PopularProductCardState extends State<PopularProductCard> {
                 onTap: () {
                   setState(() {
                     isFavorite = !isFavorite;
+                    if (isFavorite) {
+                      favoriteProducts.add(Product(
+                        name: widget.name,
+                        price: widget.price,
+                        imageUrl: widget.image,
+                      ));
+                    } else {
+                      favoriteProducts.removeWhere((product) =>
+                          product.name == widget.name &&
+                          product.price == widget.price &&
+                          product.imageUrl == widget.image);
+                    }
                   });
                 },
                 child: Icon(

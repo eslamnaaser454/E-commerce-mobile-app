@@ -1,10 +1,21 @@
-import 'package:ecommerce/products/productlists.dart';
+import 'package:ecommerce/products/cartpage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/models/cart.dart';
+import 'package:ecommerce/models/product.dart'; // Ensure this import is correct
 
 class DetailPage extends StatelessWidget {
   final Product product;
 
   const DetailPage({Key? key, required this.product}) : super(key: key);
+
+  void _addToCartAndNavigate(BuildContext context) {
+    final cart = Provider.of<Cart>(context, listen: false);
+    cart.addItem(product);
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => CartPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +104,7 @@ class DetailPage extends StatelessWidget {
                           const SizedBox(height: 16),
                           Center(
                             child: ElevatedButton(
-                              onPressed: () {
-                                // Add your buy now functionality here
-                                print('Buying ${product.name}');
-                              },
+                              onPressed: () => _addToCartAndNavigate(context),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
                                     const Color.fromRGBO(96, 85, 216, 1),

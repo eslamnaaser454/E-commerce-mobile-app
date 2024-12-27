@@ -152,8 +152,7 @@ class _SignUpPageState extends State<Loginpage> {
                               context,
                               _createPageRoute(HomePage(
                                   name: fullName,
-                                  email:
-                                      email))); // Check the 'isVerify' field in Firestore
+                                  email: email))); // Check the 'isVerify' field in Firestore
                         }
                       } catch (e) {
                         // Show an alert if there is an error (e.g., wrong credentials)

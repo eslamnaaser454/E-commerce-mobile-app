@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'productlists.dart'; // Import the Product class
+import 'package:ecommerce/models/product.dart'; // Ensure this import is correct
 
 class FavoritePage extends StatelessWidget {
   final String name;
