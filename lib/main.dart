@@ -2,6 +2,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:ecommerce/splash_screen/SplashScreen.dart';
+import 'package:ecommerce/OrderHistory.dart'; 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,8 +44,7 @@ class ecommerce extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Removes the debug banner
       initialRoute: '/',
       routes: {
-        '/': (context) => SplashScreen(), // Use SplashScreen here
-        // '/signup': (context) => SignUpPage(),
+        '/': (context) => SplashScreen(),
       },
     );
   }
