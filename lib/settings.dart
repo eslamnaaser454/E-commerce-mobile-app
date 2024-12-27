@@ -1,9 +1,8 @@
 /* lib/settings.dart */
 import 'package:flutter/material.dart';
-import 'actionbar.dart'; // Import the ActionBar
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +110,7 @@ class AccountSection extends StatelessWidget {
   final VoidCallback onBackPressed;
 
   const AccountSection({
-    Key? key,
+    super.key,
     this.name = 'TruYou',
     this.email = 'truyou.team@gmail.com',
     this.profileImage = 'https://example.com/profile_image.png',
@@ -121,7 +120,7 @@ class AccountSection extends StatelessWidget {
     required this.onHelpCenterPressed,
     required this.onAboutUsPressed,
     required this.onBackPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +189,7 @@ class SettingsButton extends StatelessWidget {
   final bool showArrow;
   final EdgeInsets padding;
 
-  const SettingsButton({
+  const SettingsButton({super.key, 
     this.title = 'Language',
     required this.onPressed,
     required this.icon,

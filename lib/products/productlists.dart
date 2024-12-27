@@ -1,7 +1,8 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'detailpage.dart';
-import 'favorite.dart'; // Import the favorite page
 import 'cartpage.dart'; // Import the cart page
 import '../models/product.dart'; // Import the Product model from the correct file
 import '../models/cart.dart'; // Import the Cart model
@@ -26,6 +27,7 @@ class ProductListPage extends StatelessWidget {
   final String name;
   final String email;
 
+  // ignore: use_key_in_widget_constructors
   ProductListPage({required this.name, required this.email});
 
   final List<Product> products = [
@@ -75,10 +77,10 @@ class ProductListPage extends StatelessWidget {
 class ProductCard extends StatefulWidget {
   final Product product;
 
-  ProductCard({
-    Key? key,
+  const ProductCard({
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   @override
   _ProductCardState createState() => _ProductCardState();
@@ -177,7 +179,6 @@ class _ProductCardState extends State<ProductCard> {
                   onPressed: () {
                     final cart = Provider.of<Cart>(context, listen: false);
                     cart.addItem(widget.product);
-                    print('Added ${widget.product.name} to cart');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromRGBO(96, 85, 216, 1),
@@ -209,7 +210,7 @@ class Header extends StatelessWidget {
   final VoidCallback? onBackPressed;
   final VoidCallback? onCartPressed;
 
-  Header({
+  const Header({
     Key? key,
     this.title = 'Products',
     this.onBackPressed,

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:ecommerce/products/productlists.dart';
 import 'package:flutter/material.dart';
 import 'actionbar.dart'; // Import the ActionBar
@@ -21,43 +23,17 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   TextEditingController _searchController = TextEditingController();
   List<Product> _allProducts = [
-    Product(
-        name: 'Barce watch', price: 40, imageUrl: 'Media/images/barce watch.png'),
+    Product(name: 'Barce watch', price: 40, imageUrl: 'Media/images/barce watch.png'),
     Product(name: 'Nike Shoes', price: 430, imageUrl: 'images/nikeshoes.png'),
-    Product(
-        name: 'Casio watch', price: 333, imageUrl: 'Media/images/casio watch.png'),
-    Product(
-        name: 'Green sneakers',
-        price: 40,
-        imageUrl: 'Media/images/green sneakers.png'),
-    Product(
-        name: 'black t-shirt',
-        price: 15,
-        imageUrl: 'Media/images/black t-shirt.png'),
-    Product(
-        name: 'iphone watch',
-        price: 333,
-        imageUrl: 'Media/images/iphone watch.png'),
-    Product(
-        name: 'Classic shoes',
-        price: 70,
-        imageUrl: 'Media/images/blue classis shoes.png'),
-    Product(
-        name: 'pump jacket',
-        price: 400,
-        imageUrl: 'Media/images/blue pump jacket.png'),
-    Product(
-        name: 'Skyblue t-shirt',
-        price: 330,
-        imageUrl: 'Media/images/skyblue t-shirt.png'),
-    Product(
-        name: 'Black converse',
-        price: 50,
-        imageUrl: 'Media/images/black converse.png'),
-    Product(
-        name: 'leather jacket',
-        price: 400,
-        imageUrl: 'Media/images/brown leather jacket.png'),
+    Product(name: 'Casio watch', price: 333, imageUrl: 'Media/images/casio watch.png'),
+    Product(name: 'Green sneakers', price: 40, imageUrl: 'Media/images/green sneakers.png'),
+    Product(name: 'black t-shirt', price: 15, imageUrl: 'Media/images/black t-shirt.png'),
+    Product(name: 'iphone watch', price: 333, imageUrl: 'Media/images/iphone watch.png'),
+    Product(name: 'Classic shoes', price: 70, imageUrl: 'Media/images/blue classis shoes.png'),
+    Product(name: 'pump jacket', price: 400, imageUrl: 'Media/images/blue pump jacket.png'),
+    Product(name: 'Skyblue t-shirt', price: 330, imageUrl: 'Media/images/skyblue t-shirt.png'),
+    Product(name: 'Black converse', price: 50, imageUrl: 'Media/images/black converse.png'),
+    Product(name: 'leather jacket', price: 400, imageUrl: 'Media/images/brown leather jacket.png'),
   ];
   List<Product> _filteredProducts = [];
   Product? _selectedProduct;
@@ -79,8 +55,7 @@ class _HomePageState extends State<HomePage> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => HomePage(name: name, email: email)),
+          MaterialPageRoute(builder: (context) => HomePage(name: name, email: email)),
         );
         break;
       case 1:
@@ -89,18 +64,13 @@ class _HomePageState extends State<HomePage> {
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => ProductListPage(
-                    name: name,
-                    email: email,
-                  )),
+          MaterialPageRoute(builder: (context) => ProductListPage(name: name, email: email)),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => ProfileScreen(name: name, email: email)),
+          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email: email)),
         );
         break;
     }
@@ -112,8 +82,7 @@ class _HomePageState extends State<HomePage> {
         _filteredProducts = _allProducts;
       } else {
         _filteredProducts = _allProducts
-            .where((product) =>
-                product.name.toLowerCase().contains(query.toLowerCase()))
+            .where((product) => product.name.toLowerCase().contains(query.toLowerCase()))
             .toList();
       }
     });
@@ -150,14 +119,11 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ProfileScreen(name: name, email: email)),
+                          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email: email)),
                         );
                       },
                       child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('Media/images/profile image.jpg'),
+                        backgroundImage: AssetImage('Media/images/profile image.jpg'),
                         radius: 24,
                       ),
                     ),
@@ -189,8 +155,7 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsScreen()),
+                          MaterialPageRoute(builder: (context) => SettingsScreen()),
                         );
                       },
                     ),
@@ -263,8 +228,7 @@ class _HomePageState extends State<HomePage> {
                           // Add the image with padding
                           Positioned.fill(
                             child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 16.0), // Padding for the image
+                              padding: const EdgeInsets.only(left: 16.0), // Padding for the image
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Image.asset(

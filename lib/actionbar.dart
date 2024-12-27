@@ -1,12 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:ecommerce/HomePage.dart';
 
 class ActionBar extends StatefulWidget {
   final int currentIndex;
   final Function(int) onTap;
 
-  const ActionBar({Key? key, required this.currentIndex, required this.onTap})
-      : super(key: key);
+  const ActionBar({super.key, required this.currentIndex, required this.onTap});
 
   @override
   _ActionBarState createState() => _ActionBarState();

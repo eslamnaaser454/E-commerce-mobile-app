@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:ecommerce/products/favorite.dart';
 import 'package:ecommerce/products/productlists.dart';
 import 'package:ecommerce/settings.dart';
