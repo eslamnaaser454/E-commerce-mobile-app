@@ -15,12 +15,17 @@ class MyApp extends StatelessWidget {
 
 class ProductListPage extends StatelessWidget {
   final List<Product> products = [
-    const Product(name: 'Watch', price: 40, imageUrl: 'Media/images/Watch.png'),
-    const Product(name: 'Nike Shoes', price: 430, imageUrl: 'Media/images/Nike.png'),
-    const Product(name: 'LG TV', price: 330, imageUrl: 'Media/images/TV.png'),
-    const Product(name: 'Airpods', price: 333, imageUrl: 'Media/images/Airpods.png'),
-    const Product(name: 'Jacket', price: 50, imageUrl: 'Media/images/Jacket.png'),
-    const Product(name: 'Hoodie', price: 400, imageUrl: 'Media/images/Hoodie.png'),
+    const Product(
+        name: 'Watch', price: 40, imageUrl: 'Media/images/watch1.jpg'),
+    const Product(
+        name: 'Nike Shoes', price: 430, imageUrl: 'Media/images/nike.jpg'),
+    const Product(name: 'LG TV', price: 330, imageUrl: 'Media/images/TV.jpg'),
+    const Product(
+        name: 'Airpods', price: 333, imageUrl: 'Media/images/earphones.jpg'),
+    const Product(
+        name: 'Jacket', price: 50, imageUrl: 'Media/images/jacket.jpg'),
+    const Product(
+        name: 'Hoodie', price: 400, imageUrl: 'Media/images/red-hoodie.jpg'),
   ];
 
   @override
@@ -87,7 +92,8 @@ class ProductCard extends StatelessWidget {
             child: Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(10.0)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(10.0)),
                   child: Image.asset(
                     product.imageUrl,
                     fit: BoxFit.cover,
@@ -117,6 +123,7 @@ class ProductCard extends StatelessWidget {
             child: Text(
               '\$${product.price}',
               style: const TextStyle(
+                fontWeight: FontWeight.bold,
                 fontFamily: 'Poppins',
                 color: Color.fromRGBO(96, 85, 216, 1),
               ),
@@ -126,7 +133,28 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Align(
               alignment: Alignment.bottomRight,
-              child: Icon(Icons.add_circle, color: const Color.fromRGBO(96, 85, 216, 1)),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Add your add-to-cart functionality here
+                  print('Added ${product.name} to cart');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(96, 85, 216, 1),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 9.0, vertical: 4.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: const Text(
+                  'Add to Cart',
+                  style: TextStyle(
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    fontFamily: 'Poppins',
+                    fontSize: 12, // Smaller font size
+                  ),
+                ),
+              ),
             ),
           ),
         ],
@@ -149,21 +177,21 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
+            ),
           ),
-          const SizedBox(width: 16),
-          Expanded(
+          Center(
             child: Text(
               title,
-              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Color(0xFF000000),
               ),
