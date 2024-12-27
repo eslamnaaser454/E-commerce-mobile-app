@@ -16,7 +16,7 @@ class ecommerce extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => ProductListPage(),
-      },
-    );
-  }
+    },
+);
+}
 }
