@@ -509,6 +509,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
               ),
             ],
           ),
+          
           Text(
             '\$${widget.price}',
             style: const TextStyle(

@@ -1,67 +1,42 @@
-import 'package:ecommerce/HomePage.dart';
-import 'package:ecommerce/actionbar.dart';
-import 'package:ecommerce/profile.dart';
 import 'package:flutter/material.dart';
-import 'detailpage.dart'; // Import the detail page
+import 'detailpage.dart';
+import 'favorite.dart'; // Import the favorite page
 
-class ProductListPage extends StatefulWidget {
-   final String name;
-  final String email;
-
-  ProductListPage({super.key, required this.name, required this.email});
-  @override
-  _ProductListPageState createState() => _ProductListPageState();
+void main() {
+  runApp(MyApp());
 }
 
-class _ProductListPageState extends State<ProductListPage> {
-   late String name;
-  late String email;
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ProductListPage(name: '', email: ''),
+    );
+  }
+}
+
+List<Product> favoriteProducts = []; // Global list for favorite products
+Map<String, bool> favoriteStatus = {}; // Global map to track favorite status
+
+class ProductListPage extends StatelessWidget {
+  final String name;
+  final String email;
+
+  ProductListPage({required this.name, required this.email});
+
   final List<Product> products = [
-    const Product(name: 'Watch', price: 40, imageUrl: 'Media/images/watch1.jpg'),
-    const Product(name: 'Nike Shoes', price: 430, imageUrl: 'Media/images/nike.jpg'),
+    const Product(
+        name: 'Watch', price: 40, imageUrl: 'Media/images/watch1.jpg'),
+    const Product(
+        name: 'Nike Shoes', price: 430, imageUrl: 'Media/images/nike.jpg'),
     const Product(name: 'LG TV', price: 330, imageUrl: 'Media/images/TV.jpg'),
-    const Product(name: 'Airpods', price: 333, imageUrl: 'Media/images/earphones.jpg'),
-    const Product(name: 'Jacket', price: 50, imageUrl: 'Media/images/jacket.jpg'),
-    const Product(name: 'Hoodie', price: 400, imageUrl: 'Media/images/red-hoodie.jpg'),
+    const Product(
+        name: 'Airpods', price: 333, imageUrl: 'Media/images/earphones.jpg'),
+    const Product(
+        name: 'Jacket', price: 50, imageUrl: 'Media/images/jacket.jpg'),
+    const Product(
+        name: 'Hoodie', price: 400, imageUrl: 'Media/images/red-hoodie.jpg'),
   ];
-
-  int _selectedIndex = 2;
-  void initState() {
-    super.initState();
-    name = widget.name;
-    email=widget.email;
-  }
-  
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage(name: name, email: email)),
-        );
-        break;
-      case 1:
-        // Implement navigation for case 1 if needed
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ProductListPage(name: name,email: email,)),
-        );
-        break;
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ProfileScreen(name: name, email: email)),
-        );
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,10 +64,6 @@ class _ProductListPageState extends State<ProductListPage> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: ActionBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }
@@ -124,6 +95,12 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = favoriteStatus[widget.product.name] ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,6 +143,14 @@ class _ProductCardState extends State<ProductCard> {
                       onPressed: () {
                         setState(() {
                           isFavorite = !isFavorite;
+                          favoriteStatus[widget.product.name] = isFavorite;
+                          if (isFavorite) {
+                            if (!favoriteProducts.contains(widget.product)) {
+                              favoriteProducts.add(widget.product);
+                            }
+                          } else {
+                            favoriteProducts.remove(widget.product);
+                          }
                         });
                       },
                     ),
