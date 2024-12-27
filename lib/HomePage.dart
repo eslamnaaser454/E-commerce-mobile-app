@@ -1,8 +1,38 @@
 import 'package:flutter/material.dart';
 import 'actionbar.dart'; // Import the ActionBar
+import 'profile.dart'; // Import the ProfileScreen
+import 'settings.dart'; // Import the SettingsScreen
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileScreen()),
+        );
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +47,19 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      backgroundImage:
-                          AssetImage('Media/images/profile image.jpg'),
-                      radius: 24,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileScreen()),
+                        );
+                      },
+                      child: CircleAvatar(
+                        backgroundImage:
+                            AssetImage('Media/images/profile image.jpg'),
+                        radius: 24,
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Column(
@@ -47,7 +86,13 @@ class HomePage extends StatelessWidget {
                     const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.settings),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsScreen()),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -157,7 +202,10 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const ActionBar(),
+      bottomNavigationBar: ActionBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }

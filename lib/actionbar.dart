@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'HomePage.dart';
+import 'profile.dart';
 
-class ActionBar extends StatelessWidget {
-  const ActionBar({Key? key}) : super(key: key);
+class ActionBar extends StatefulWidget {
+  final int currentIndex;
+  final Function(int) onTap;
 
+  const ActionBar({Key? key, required this.currentIndex, required this.onTap})
+      : super(key: key);
+
+  @override
+  _ActionBarState createState() => _ActionBarState();
+}
+
+class _ActionBarState extends State<ActionBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: widget.currentIndex,
+      onTap: widget.onTap,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Padding(
@@ -15,15 +28,24 @@ class ActionBar extends StatelessWidget {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search, size: 28),
+          icon: Padding(
+            padding: EdgeInsets.only(top: 12),
+            child: Icon(Icons.search, size: 28),
+          ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_bag, size: 28),
+          icon: Padding(
+            padding: EdgeInsets.only(top: 12),
+            child: Icon(Icons.shopping_bag, size: 28),
+          ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person, size: 28),
+          icon: Padding(
+            padding: EdgeInsets.only(top: 12),
+            child: Icon(Icons.person, size: 28),
+          ),
           label: '',
         ),
       ],
