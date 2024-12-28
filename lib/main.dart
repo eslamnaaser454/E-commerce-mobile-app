@@ -1,4 +1,3 @@
-
 // ignore_for_file: camel_case_types
 
 import 'package:ecommerce/splash_screen/SplashScreen.dart';
@@ -22,8 +21,8 @@ void main() async {
         iosBundleId: 'com.example.ecommerce',
       ),
     );
-  // ignore: empty_catches
   } catch (e) {
+    // Handle initialization errors if needed
   }
 
   runApp(
@@ -44,6 +43,7 @@ class ecommerce extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
+        // Add other routes here as needed
       },
     );
   }

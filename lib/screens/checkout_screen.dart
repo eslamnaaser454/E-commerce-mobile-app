@@ -1,4 +1,7 @@
+import 'package:ecommerce/models/OrderHistoryStorage.dart';
+import 'package:ecommerce/models/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'order_confirmation_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -19,12 +22,28 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     _contactController.dispose();
     super.dispose();
   }
-
   void _confirmOrder() {
     if (_formKey.currentState!.validate()) {
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => OrderConfirmationScreen()),
-      );
+      final cart = Provider.of<Cart>(context, listen: false);
+      print('Navigating to OrderConfirmationScreen with items: ${cart.items.keys.toList()}');
+
+      try {
+        // Add items to order history before clearing the cart
+        print('Cart stored');
+        OrderHistoryStorage.addOrder(cart.items.keys.toList());
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => OrderConfirmationScreen(cartItems: cart.items.keys.toList()),
+          ),
+        );
+      } finally {
+        // Clear the cart regardless of the navigation outcome
+        cart.clear();
+        print('Cart cleared');
+      }
+    } else {
+      print('Form validation failed');
     }
   }
 
@@ -42,7 +61,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF1F1F1), // Set background color
+                  color: Color(0xFFF1F1F1),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: TextFormField(
@@ -66,7 +85,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               SizedBox(height: 10),
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF1F1F1), // Set background color
+                  color: Color(0xFFF1F1F1),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: TextFormField(
@@ -90,7 +109,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               SizedBox(height: 10),
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF1F1F1), // Set background color
+                  color: Color(0xFFF1F1F1),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: TextFormField(
@@ -115,7 +134,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ElevatedButton(
                 onPressed: _confirmOrder,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF6055D8), // Set background color
+                  backgroundColor: Color(0xFF6055D8),
                   padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
@@ -124,7 +143,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 child: Text(
                   'Confirm Order',
                   style: TextStyle(
-                    color: Colors.white, // Set text color
+                    color: Colors.white,
                     fontFamily: 'Poppins',
                     fontSize: 16,
                   ),

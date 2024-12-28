@@ -1,14 +1,18 @@
 // ignore_for_file: file_names, library_private_types_in_public_api
 
+import 'package:ecommerce/models/OrderHistoryStorage.dart';
+import 'package:ecommerce/models/product.dart';
 import 'package:flutter/material.dart';
-
 import 'HomePage.dart';
 
 class OrderHistory extends StatelessWidget {
-  const OrderHistory({super.key});
+    final List<Product> cartItems;
+  const OrderHistory({Key? key, required this.cartItems}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final orderHistory = OrderHistoryStorage.orderHistory;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -30,36 +34,19 @@ class OrderHistory extends StatelessWidget {
                 },
               ),
               Expanded(
-                child: ListView(
-                  children: [
-                    OrderItem(
-                      image: 'Media/images/Watch.png',
-                      name: 'Watch',
-                      brand: 'Rolex',
-                      price: 40,
+                child: ListView.builder(
+                  itemCount: orderHistory.length,
+                  itemBuilder: (context, index) {
+                    final product = orderHistory[index];
+                    return OrderItem(
+                      image: product.imageUrl,
+                      name: product.name,
+                      price: product.price,
                       onTrackOrder: () {
-                        print('Track order for Watch');
+                        print('Track order for ${product.name}');
                       },
-                    ),
-                    OrderItem(
-                      image: 'Media/images/Airpods.png', 
-                      name: 'Airpods',
-                      brand: 'Apple',
-                      price: 333,
-                      onTrackOrder: () {
-                        print('Track order for Airpods');
-                      },
-                    ),
-                    OrderItem(
-                      image: 'Media/images/Hoodie.png', 
-                      name: 'Hoodie',
-                      brand: 'Puma',
-                      price: 50,
-                      onTrackOrder: () {
-                        print('Track order for Hoodie');
-                      },
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ],
@@ -73,7 +60,6 @@ class OrderHistory extends StatelessWidget {
 class OrderItem extends StatelessWidget {
   final String image;
   final String name;
-  final String brand;
   final double price;
   final VoidCallback onTrackOrder;
 
@@ -81,7 +67,6 @@ class OrderItem extends StatelessWidget {
     super.key,
     required this.image,
     required this.name,
-    required this.brand,
     required this.price,
     required this.onTrackOrder,
   });
@@ -89,7 +74,7 @@ class OrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity, // Make the container take full width
+      width: double.infinity,
       height: 110,
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -110,7 +95,7 @@ class OrderItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
-                image: AssetImage(image), 
+                image: AssetImage(image),
                 fit: BoxFit.cover,
               ),
             ),
@@ -132,16 +117,6 @@ class OrderItem extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    brand,
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF9B9999),
-                      height: 1.5,
-                    ),
-                  ),
                   const SizedBox(height: 8),
                   Text(
                     '\$${price.toStringAsFixed(0)}',

@@ -1,31 +1,35 @@
 import 'package:ecommerce/OrderHistory.dart';
+import 'package:ecommerce/models/product.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce/HomePage.dart'; // Import the home screen
 
 class OrderConfirmationScreen extends StatelessWidget {
+  final List<Product> cartItems;
+
+  const OrderConfirmationScreen({Key? key, required this.cartItems}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Remove the back button
+        automaticallyImplyLeading: false,
         title: const Text(
           'Order Confirmation',
           style: TextStyle(
             fontFamily: 'Poppins',
           ),
         ),
-        backgroundColor: const Color(0xFF6055D8), // Set app bar color
+        backgroundColor: const Color(0xFF6055D8),
       ),
-      body: Center( // Use Center widget to align everything centrally
+      body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Center items vertically
-            crossAxisAlignment: CrossAxisAlignment.center, // Center items horizontally
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Icon(
                 Icons.check_circle_outline,
-                color: Color(0xFF6055D8), // Set icon color
+                color: Color(0xFF6055D8),
                 size: 100,
               ),
               const SizedBox(height: 20),
@@ -34,10 +38,10 @@ class OrderConfirmationScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF6055D8), // Set text color
+                  color: Color(0xFF6055D8),
                   fontFamily: 'Poppins',
                 ),
-                textAlign: TextAlign.center, // Align text center
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               const Text(
@@ -47,20 +51,23 @@ class OrderConfirmationScreen extends StatelessWidget {
                   color: Colors.black54,
                   fontFamily: 'Poppins',
                 ),
-                textAlign: TextAlign.center, // Align text center
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
+                  // Navigate to OrderHistory and then pop back to clear the cart
+                  Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => OrderHistory(),
+                      builder: (context) => OrderHistory(cartItems: cartItems),
                     ),
-                    (Route<dynamic> route) => false,
-                  );
+                  ).then((_) {
+                    // Pop back to the previous screen to trigger the `then` block in CheckoutScreen
+                    Navigator.pop(context);
+                  });
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6055D8), // Set background color
+                  backgroundColor: const Color(0xFF6055D8),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32.0,
                     vertical: 12.0,
@@ -72,7 +79,7 @@ class OrderConfirmationScreen extends StatelessWidget {
                 child: const Text(
                   'Orders',
                   style: TextStyle(
-                    color: Colors.white, // Set text color
+                    color: Colors.white,
                     fontFamily: 'Poppins',
                     fontSize: 16,
                   ),

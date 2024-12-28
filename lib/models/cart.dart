@@ -25,4 +25,15 @@ class Cart with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void clear() {
+    _items.clear();
+    notifyListeners();
+  }
+
+  double get totalPrice {
+    return _items.entries.fold(0.0, (total, entry) {
+      return total + (entry.key.price * entry.value);
+    });
+  }
 }
