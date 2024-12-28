@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, library_private_types_in_public_api
 
+import 'package:ecommerce/OrderHistory.dart';
 import 'package:ecommerce/products/favorite.dart';
 import 'package:ecommerce/products/productlists.dart';
 import 'package:ecommerce/search.dart';
@@ -88,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Profile Image
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage("images/Blank.png"),
+                    backgroundImage: AssetImage("Media/images/avatar.png"),
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   Text(
@@ -130,9 +131,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   _buildMenuItem(
-                    icon: Icons.contact_mail,
-                    title: 'Contact',
-                    onTap: () {},
+                    icon: Icons.history,
+                    title: 'Order History',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OrderHistory(cartItems: [],)),
+                      );
+                    },
                   ),
                   SizedBox(height: constraints.maxHeight * 0.02),
                   _buildMenuItem(
