@@ -110,7 +110,7 @@ class CartPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Items'),
+                        Text('Products'),
                         Text('$itemCount'),
                       ],
                     ),
@@ -125,7 +125,7 @@ class CartPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Delivery Charges'),
-                        Text('\$2'), // Example delivery charge
+                        Text(total > 0 ? '\$2' : '\$0'), // Example delivery charge
                       ],
                     ),
                     Divider(),
@@ -140,7 +140,7 @@ class CartPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '\$${total +2}', // Adjusted total
+                          '\$${total > 0 ? total + 2 : total}', // Adjusted total
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
