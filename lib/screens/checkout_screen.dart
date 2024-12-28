@@ -25,22 +25,26 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   void _confirmOrder() {
     if (_formKey.currentState!.validate()) {
       final cart = Provider.of<Cart>(context, listen: false);
-      print('Navigating to OrderConfirmationScreen with items: ${cart.items.keys.toList()}');
+      if (cart.items.isNotEmpty) {
+        print('Navigating to OrderConfirmationScreen with items: ${cart.items.keys.toList()}');
 
-      try {
-        // Add items to order history before clearing the cart
-        print('Cart stored');
-        OrderHistoryStorage.addOrder(cart.items.keys.toList());
+        try {
+          // Add items to order history before clearing the cart
+          print('Cart stored');
+          OrderHistoryStorage.addOrder(cart.items.keys.toList());
 
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => OrderConfirmationScreen(cartItems: cart.items.keys.toList()),
-          ),
-        );
-      } finally {
-        // Clear the cart regardless of the navigation outcome
-        cart.clear();
-        print('Cart cleared');
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => OrderConfirmationScreen(cartItems: cart.items.keys.toList()),
+            ),
+          );
+        } finally {
+          // Clear the cart regardless of the navigation outcome
+          cart.clear();
+          print('Cart cleared');
+        }
+      } else {
+        print('Cart is empty');
       }
     } else {
       print('Form validation failed');
@@ -49,6 +53,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context); 
     return Scaffold(
       appBar: AppBar(
         title: Text('Checkout'),
@@ -132,7 +137,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _confirmOrder,
+                onPressed: cart.items.isNotEmpty ? _confirmOrder : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF6055D8),
                   padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0),

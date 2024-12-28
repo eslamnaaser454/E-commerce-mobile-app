@@ -149,12 +149,14 @@ class CartPage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => CheckoutScreen()),
-                        );
-                      },
+                      ElevatedButton(
+                      onPressed: cart.items.isNotEmpty
+                          ? () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                              );
+                            }
+                          : null, // Disable if cart is empty
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF6055D8),
                         padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0),
