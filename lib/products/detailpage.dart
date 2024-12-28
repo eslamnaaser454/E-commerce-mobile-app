@@ -2,7 +2,7 @@ import 'package:ecommerce/products/cartpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce/models/cart.dart';
-import 'package:ecommerce/models/product.dart'; // Ensure this import is correct
+import 'package:ecommerce/models/product.dart';
 
 class DetailPage extends StatelessWidget {
   final Product product;
@@ -76,13 +76,8 @@ class DetailPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Culpa aliquam consequuntur veritatis at '
-                            'consequuntur praesentium baetae temporibus nobis. '
-                            'Velit dolorem facilis neque autem. Itaque voluptatem '
-                            'expedita qui eveniet id veritatis eaque. Blanditiis '
-                            'quia placeat nemo. Nobis laudantium nesciunt '
-                            'perspiciatis sit eligendi.',
+                          Text(
+                            product.description, // Display the product's description
                           ),
                           const SizedBox(height: 16),
                           const Text(

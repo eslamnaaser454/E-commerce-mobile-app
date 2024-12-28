@@ -24,17 +24,17 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   TextEditingController _searchController = TextEditingController();
   List<Product> _allProducts = [
-    Product(name: 'Barce watch', price: 40, imageUrl: 'Media/images/barce watch.png'),
-    Product(name: 'Nike Shoes', price: 430, imageUrl: 'images/nikeshoes.png'),
-    Product(name: 'Casio watch', price: 333, imageUrl: 'Media/images/casio watch.png'),
-    Product(name: 'Green sneakers', price: 40, imageUrl: 'Media/images/green sneakers.png'),
-    Product(name: 'black t-shirt', price: 15, imageUrl: 'Media/images/black t-shirt.png'),
-    Product(name: 'iphone watch', price: 333, imageUrl: 'Media/images/iphone watch.png'),
-    Product(name: 'Classic shoes', price: 70, imageUrl: 'Media/images/blue classis shoes.png'),
-    Product(name: 'pump jacket', price: 400, imageUrl: 'Media/images/blue pump jacket.png'),
-    Product(name: 'Skyblue t-shirt', price: 330, imageUrl: 'Media/images/skyblue t-shirt.png'),
-    Product(name: 'Black converse', price: 50, imageUrl: 'Media/images/black converse.png'),
-    Product(name: 'leather jacket', price: 400, imageUrl: 'Media/images/brown leather jacket.png'),
+    Product(name: 'Barce watch', price: 40, imageUrl: 'Media/images/barce watch.png', description: ''),
+    Product(name: 'Nike Shoes', price: 430, imageUrl: 'images/nikeshoes.png', description: ''),
+    Product(name: 'Casio watch', price: 333, imageUrl: 'Media/images/casio watch.png', description: ''),
+    Product(name: 'Green sneakers', price: 40, imageUrl: 'Media/images/green sneakers.png', description: ''),
+    Product(name: 'black t-shirt', price: 15, imageUrl: 'Media/images/black t-shirt.png', description: ''),
+    Product(name: 'iphone watch', price: 333, imageUrl: 'Media/images/iphone watch.png', description: ''),
+    Product(name: 'Classic shoes', price: 70, imageUrl: 'Media/images/blue classis shoes.png', description: ''),
+    Product(name: 'pump jacket', price: 400, imageUrl: 'Media/images/blue pump jacket.png', description: ''),
+    Product(name: 'Skyblue t-shirt', price: 330, imageUrl: 'Media/images/skyblue t-shirt.png', description: ''),
+    Product(name: 'Black converse', price: 50, imageUrl: 'Media/images/black converse.png', description: ''),
+    Product(name: 'leather jacket', price: 400, imageUrl: 'Media/images/brown leather jacket.png', description: ''),
   ];
   List<Product> _filteredProducts = [];
   Product? _selectedProduct;
@@ -475,7 +475,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                       favoriteProducts.add(Product(
                         name: widget.name,
                         price: widget.price,
-                        imageUrl: widget.image,
+                        imageUrl: widget.image, description: '',
                       ));
                     } else {
                       favoriteProducts.removeWhere((product) =>
@@ -621,7 +621,7 @@ class _PopularProductCardState extends State<PopularProductCard> {
                       favoriteProducts.add(Product(
                         name: widget.name,
                         price: widget.price,
-                        imageUrl: widget.image,
+                        imageUrl: widget.image, description: '',
                       ));
                     } else {
                       favoriteProducts.removeWhere((product) =>

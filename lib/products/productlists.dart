@@ -29,15 +29,44 @@ class ProductListPage extends StatelessWidget {
 
   // ignore: use_key_in_widget_constructors
   ProductListPage({required this.name, required this.email});
-
-  final List<Product> products = [
-    Product(name: 'Watch', price: 40, imageUrl: 'Media/images/watch1.jpg'),
-    Product(name: 'Nike Shoes', price: 430, imageUrl: 'Media/images/nike.jpg'),
-    Product(name: 'LG TV', price: 330, imageUrl: 'Media/images/TV.jpg'),
-    Product(name: 'Airpods', price: 333, imageUrl: 'Media/images/earphones.jpg'),
-    Product(name: 'Jacket', price: 50, imageUrl: 'Media/images/jacket.jpg'),
-    Product(name: 'Hoodie', price: 400, imageUrl: 'Media/images/red-hoodie.jpg'),
-  ];
+final List<Product> products = [
+  Product(
+    name: 'Watch',
+    price: 40,
+    imageUrl: 'Media/images/watch1.jpg',
+    description: 'Experience timeless elegance with this stylish watch, featuring a sleek design that complements any outfit. Crafted with precision, it offers both functionality and sophistication, making it a perfect accessory for any occasion. The durable materials ensure longevity, while the classic look adds a touch of luxury to your wrist. Whether you\'re attending a formal event or going about your daily routine, this watch is designed to keep you on time and in style.',
+  ),
+  Product(
+    name: 'Nike Shoes',
+    price: 430,
+    imageUrl: 'Media/images/nike.jpg',
+    description: 'Step into comfort and durability with these Nike shoes. Designed for both performance and style, they provide excellent support and cushioning, making them ideal for both athletic activities and everyday wear. The breathable fabric keeps your feet cool, while the sturdy sole offers traction and stability. Whether you\'re hitting the gym or running errands, these shoes are built to keep up with your active lifestyle, ensuring you look and feel great.',
+  ),
+  Product(
+    name: 'LG TV',
+    price: 330,
+    imageUrl: 'Media/images/TV.jpg',
+    description: 'Immerse yourself in entertainment with this high-definition LG TV. With vibrant colors and crystal-clear picture quality, it transforms your viewing experience, bringing your favorite shows and movies to life. The sleek design fits seamlessly into any living space, while the advanced technology ensures smooth and responsive performance. Enjoy a cinematic experience from the comfort of your home, with features that cater to all your entertainment needs.',
+  ),
+  Product(
+    name: 'Airpods',
+    price: 333,
+    imageUrl: 'Media/images/earphones.jpg',
+    description: 'Enjoy the freedom of wireless audio with these Airpods. Offering excellent sound quality and a comfortable fit, they are perfect for music lovers and those on the go, providing a seamless listening experience. The compact design makes them easy to carry, while the long-lasting battery ensures you stay connected throughout the day. Whether you\'re working out or commuting, these Airpods deliver crisp, clear sound without the hassle of wires.',
+  ),
+  Product(
+    name: 'Jacket',
+    price: 50,
+    imageUrl: 'Media/images/jacket.jpg',
+    description: 'Stay warm and stylish with this winter jacket. Designed to provide maximum comfort and insulation, it is perfect for cold weather, ensuring you stay cozy while looking fashionable. The high-quality materials offer protection against the elements, while the modern design adds a chic touch to your winter wardrobe. Whether you\'re heading to the office or enjoying a weekend getaway, this jacket is your go-to choice for warmth and style.',
+  ),
+  Product(
+    name: 'Hoodie',
+    price: 400,
+    imageUrl: 'Media/images/red-hoodie.jpg',
+    description: 'Relax in comfort with this casual hoodie. Made from soft, high-quality materials, it offers a snug fit and is perfect for lounging or casual outings, combining style with everyday practicality. The versatile design makes it easy to pair with any outfit, while the cozy fabric keeps you warm and comfortable. Whether you\'re at home or on the move, this hoodie is a must-have for those who value comfort and style.',
+  ),
+];
 
   @override
   Widget build(BuildContext context) {
