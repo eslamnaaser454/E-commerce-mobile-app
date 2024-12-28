@@ -2,7 +2,6 @@
 // ignore_for_file: camel_case_types
 
 import 'package:ecommerce/splash_screen/SplashScreen.dart';
-import 'package:ecommerce/OrderHistory.dart'; 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,8 +22,8 @@ void main() async {
         iosBundleId: 'com.example.ecommerce',
       ),
     );
+  // ignore: empty_catches
   } catch (e) {
-    print("Firebase is already initialized");
   }
 
   runApp(

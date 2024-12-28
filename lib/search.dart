@@ -7,23 +7,13 @@ import 'package:provider/provider.dart';
 import '../models/product.dart';
 import '../models/cart.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SearchPage(),
-    );
-  }
-}
-
-List<Product> favoriteProducts = [];
+List<Product> favoriteProducts1 = [];
 Map<String, bool> favoriteStatus = {};
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -170,11 +160,11 @@ class _ProductCardState extends State<ProductCard> {
                           isFavorite = !isFavorite;
                           favoriteStatus[widget.product.name] = isFavorite;
                           if (isFavorite) {
-                            if (!favoriteProducts.contains(widget.product)) {
-                              favoriteProducts.add(widget.product);
+                            if (!favoriteProducts1.contains(widget.product)) {
+                              favoriteProducts1.add(widget.product);
                             }
                           } else {
-                            favoriteProducts.removeWhere((product) => product.name == widget.product.name);
+                            favoriteProducts1.removeWhere((product) => product.name == widget.product.name);
                           }
                         });
                       },

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:ecommerce/products/productlists.dart';
+import 'package:ecommerce/search.dart';
 import 'package:flutter/material.dart';
 import 'actionbar.dart'; // Import the ActionBar
 import 'profile.dart'; // Import the ProfileScreen
@@ -59,6 +60,10 @@ class _HomePageState extends State<HomePage> {
         );
         break;
       case 1:
+         Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SearchPage()),
+        );
         // Implement navigation for case 1 if needed
         break;
       case 2:

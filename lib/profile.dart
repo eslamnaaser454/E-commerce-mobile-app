@@ -1,7 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, library_private_types_in_public_api
 
 import 'package:ecommerce/products/favorite.dart';
 import 'package:ecommerce/products/productlists.dart';
+import 'package:ecommerce/search.dart';
 import 'package:ecommerce/settings.dart';
 import 'package:ecommerce/signup-login/login.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int _selectedIndex = 3;
   late String name;
   late String email;
+  @override
   void initState() {
     super.initState();
     name = widget.name;
@@ -41,6 +43,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
         break;
       case 1:
+           Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SearchPage()),
+        );
         // Implement navigation for case 1 if needed
         break;
       case 2:

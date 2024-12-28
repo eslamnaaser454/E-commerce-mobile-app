@@ -1,3 +1,4 @@
+import 'package:ecommerce/OrderHistory.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/HomePage.dart'; // Import the home screen
 
@@ -53,7 +54,7 @@ class OrderConfirmationScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                      builder: (context) => HomePage(name: '', email: '',),
+                      builder: (context) => OrderHistory(),
                     ),
                     (Route<dynamic> route) => false,
                   );
@@ -69,7 +70,7 @@ class OrderConfirmationScreen extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Home',
+                  'Orders',
                   style: TextStyle(
                     color: Colors.white, // Set text color
                     fontFamily: 'Poppins',

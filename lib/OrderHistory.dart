@@ -1,12 +1,11 @@
+// ignore_for_file: file_names, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
-void main() {
-
-  runApp( OrderHistory());
-}
+import 'HomePage.dart';
 
 class OrderHistory extends StatelessWidget {
-  const OrderHistory({Key? key}) : super(key: key);
+  const OrderHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +16,11 @@ class OrderHistory extends StatelessWidget {
           child: Column(
             children: [
               Header(
-                onBackPressed: () {
-                  print('Back button pressed');
+                onHomePressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage(name: '', email: '')),
+                  );
                 },
               ),
               OrderTab(
@@ -76,19 +78,18 @@ class OrderItem extends StatelessWidget {
   final VoidCallback onTrackOrder;
 
   const OrderItem({
-    Key? key,
+    super.key,
     required this.image,
     required this.name,
     required this.brand,
     required this.price,
     required this.onTrackOrder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
-      width: 343,
+      width: double.infinity, // Make the container take full width
       height: 110,
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -269,41 +270,35 @@ class _OrderTabState extends State<OrderTab> with SingleTickerProviderStateMixin
 
 class Header extends StatelessWidget {
   final String title;
-  final VoidCallback? onBackPressed;
-  final bool showBackButton;
+  final VoidCallback? onHomePressed;
 
   const Header({
-    Key? key,
+    super.key,
     this.title = 'Orders',
-    this.onBackPressed,
-    this.showBackButton = true,
-  }) : super(key: key);
+    this.onHomePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Stack(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (showBackButton)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
-              ),
-            ),
-          Center(
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
+          Text(
+            title,
+            style: const TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
           ),
+          IconButton(
+            icon: const Icon(Icons.home, color: Colors.black),
+            onPressed: onHomePressed,
+          ),
+          const SizedBox(width: 48), // Placeholder to balance the row
         ],
       ),
     );
