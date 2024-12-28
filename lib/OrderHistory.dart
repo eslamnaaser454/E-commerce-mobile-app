@@ -23,7 +23,7 @@ class OrderHistory extends StatelessWidget {
                 onHomePressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage(name: '', email: '')),
+                    MaterialPageRoute(builder: (context) => HomePage(name: 'Eslam', email: 'nassereslam454@gmail.com')),
                   );
                 },
               ),

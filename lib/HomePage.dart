@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
         );
         break;
       case 1:
-         Navigator.push(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => SearchPage()),
         );
