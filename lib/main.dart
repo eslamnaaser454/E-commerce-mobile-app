@@ -22,7 +22,7 @@ void main() async {
       ),
     );
   } catch (e) {
-    // Handle initialization errors if needed
+    print('Firebase initialization failed');
   }
 
   runApp(
